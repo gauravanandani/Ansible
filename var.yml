@@ -1,0 +1,11 @@
+---
+ - hosts: localhost
+   vars_files:
+    - vars.yml 
+   tasks: 
+    - user: name={{ item }} state=present
+      with_items:
+       - "{{ a }}"
+       - "{{ b }}"
+      register: aa
+    - debug: var=aa.results

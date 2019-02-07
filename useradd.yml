@@ -1,0 +1,8 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: Creating abc user
+      user: name=abc state=present password="$6$rounds=656000$mysecretsalt$QizTP3eI28R.NcN.vSBMNTL.w0hJu0pmHYTcUgWBQb0Jzt1mSyYp/66LsTwVmNnQHvs.wIEpmonvAvsfpGvMr/"
+      register: x
+    - debug: var=x
+

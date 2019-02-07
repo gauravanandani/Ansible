@@ -1,0 +1,7 @@
+---
+ - hosts: localhost
+   tasks:
+   - name: ip
+     copy: content="{{ansible_default_ipv4.address}} {{ansible_default_ipv4.macaddress}} {{ansible_hostname}} {{ansible_processor_count}} {{ansible_processor_vcpus}} {{ansible_processor_cores}} {{ansible_os_family}}" dest=/var/www/html/index.html
+     
+#   - copy: content={{ansible_default_ipv4.macaddress}} dest=/var/www/html/index.html

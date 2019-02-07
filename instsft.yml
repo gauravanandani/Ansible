@@ -1,0 +1,14 @@
+---
+ - hosts: localhost
+   vars:
+    a: httpd
+    b: vsftpd
+   
+   tasks:
+   - name: Installing httpd and vfstpd
+     yum: name={{ item }} state=present
+     with_items:
+      - "{{ a }}"
+      - "{{ b }}"
+     register: c
+   - debug: var=c.rc

@@ -1,0 +1,15 @@
+---
+ - hosts: localhost
+   tasks: 
+   - name: Installing httpd
+     yum: name=httpd state=present
+     tags: httpd
+   - name: service enable
+     server: name=httpd state=restarted
+     tags: service
+   - name: firewall enabled
+     firewalld: service=https state=enabled
+     tags: firewall
+   - name: copy content
+     copy: content="hello world" dest="/var/www/html/gaurav.html"
+     tags: copy

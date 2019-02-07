@@ -1,0 +1,36 @@
+---
+ - hosts: localhost
+   vars:
+    a: aa
+    b: bb
+   tasks: 
+    - user: name={{ item }} state=present
+      with_items:
+       - "{{ a }}"
+       - "{{ b }}"
+      tags: user
+  
+             
+    - yum: 
+       name: vsftpd
+       state: present
+      tags: vsftpd
+              
+    - yum: 
+       name: httpd
+       state: present
+      tags: httpd
+
+    - service: 
+       name: httpd
+       state: started
+      tags: service
+
+    - service:
+       name: vsftpd
+       state: stopped
+      tags: service1
+
+    - debug: 
+       msg: "hello world"
+      tags: hi

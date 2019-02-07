@@ -1,0 +1,8 @@
+---
+ - hosts: localhost
+   tasks:
+   - name: installing vfstpd
+     yum: name=vfstpd state=present
+     register: dell
+   - name: displayign output
+     debug: msg="installed"
