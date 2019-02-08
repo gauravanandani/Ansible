@@ -3,8 +3,7 @@
    tasks:
    - name: remove anonymos user  
      mysql_user:
-        name: ''
-        host_all: yes
+        user: 'anonymous'
         state: absent 
         login_user: root
         login_password: redhat
