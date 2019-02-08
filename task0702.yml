@@ -5,11 +5,13 @@
      yum: name=httpd state=present
      tags: httpd
    - name: service enable
-     server: name=httpd state=restarted
+     service: name=httpd state=restarted
      tags: service
    - name: firewall enabled
-     firewalld: service=https state=enabled
+     firewalld: service=https state=disabled
      tags: firewall
+     register: x
+   - debug: var=x
    - name: copy content
      copy: content="hello world" dest="/var/www/html/gaurav.html"
      tags: copy
