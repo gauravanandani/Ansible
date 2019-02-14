@@ -1,0 +1,54 @@
+---
+ - hosts: localhost
+   ignore_errors: yes
+   vars: 
+        a: harry
+        b: natasha
+   tasks:
+         - user: name={{ item }} state=present password="$6$rounds=656000$mysecretsalt$QizTP3eI28R.NcN.vSBMNTL.w0hJu0pmHYTcUgWBQb0Jzt1mSyYp/66LsTwVmNnQHvs.wIEpmonvAvsfpGvMr/"
+           with_items:
+           - "{{ a }}"
+           - "{{ b }}"
+           register: x
+           tags: user
+         - debug: msg="User Added Successfully"
+           when: (x.changed == true)
+
+         - yum: name=httpd state=present
+           register: y
+
+         - debug: msg="Installed Successfully httpd"
+           when: y.failed == false
+
+         - debug: msg="Failed Installation of httpd"
+           when: y.failed == true
+
+         - yum: name=vfstpd state=present
+           register: z
+
+         - debug: msg="Installed Successfully vfstpd"
+           when: z.failed == false
+
+         - debug: msg="Failed Installation of vfstpd"
+           when: z.failed == true
+         
+         - yum: name=dddd state=present
+           register: q
+
+         - debug: msg="Installed Successfully dddd"
+           when: q.failed == false
+
+         - debug: msg="Failed Installation of dddd"
+           when: q.failed == true
+
+         - copy: content="Hello MDhack {{ansible_hostname}}" force=no dest=/var/www/html/index.html
+        
+         - replace: path="/etc/httpd/conf/httpd.conf" regexp="AllowOverride None" replace="AllowOverride AuthConfig"
+
+         - service: name=httpd state=restarted enabled=yes
+
+         - debug: msg="hi"
+         - debug: msg="hello"
+         - debug: msg="how are you"
+         - debug: msg="virendra sehwag"
+         - debug: msg="MDHACK"

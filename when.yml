@@ -1,0 +1,14 @@
+---
+ - hosts: localhost
+   ignore_errors: yes
+   tasks:
+        - yum: name=http state=present
+          register: x
+        - debug: msg="installation failed"
+          when: (x.failed == true)
+        - service: name=http state=restarted
+          register: y
+        - debug: msg="Service Failed"
+          when: y.failed == true
+        - debug: msg="Playbook Failed"
+          when: x.failed == true and y.failed == true
